@@ -26,7 +26,6 @@ form {
   height: 100vh;
   background-color: white;
   z-index: 100;
-  margin-top: 20px;
 }
 
 form.collapsed {

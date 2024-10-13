@@ -12,7 +12,12 @@ if (rawText !== "") {
 }
 
 // 2. Add event listener to form
-if (rawText !== "") functions.transformInput(rawText);
+console.log(rawText);
+if (rawText && rawText !== "") {
+  functions.transformInput(rawText);
+} else {
+  myForm.classList.remove("collapsed");
+}
 
 // 3. Add event listener to edit button
 const editButton = document.querySelector(".js-edit");
