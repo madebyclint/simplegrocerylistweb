@@ -1,6 +1,7 @@
 :root {
   --text-subdued: #666;
   --border-subdued: #ccc;
+  --background-alt: #f0f0f0;
 }
 
 body {
@@ -62,6 +63,10 @@ li {
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--border-subdued);
   width: 100%;
+}
+
+li:nth-child(even) {
+  background-color: var(--background-alt);
 }
 
 li:first-child {
