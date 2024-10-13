@@ -8,7 +8,7 @@ const rawText = searchParams.get("rawText");
 if (rawText !== "") {
   functions.prefillData(myForm, false, rawText);
 } else {
-  functions.prefillData(myForm, true);
+  // functions.prefillData(myForm, true);
 }
 
 // 2. Add event listener to form
@@ -26,4 +26,8 @@ editButton.addEventListener("click", () => {
   editButton.innerText = myForm.classList.contains("collapsed")
     ? "Edit"
     : "Close";
+
+  if (myForm.classList.contains("collapsed")) {
+    myForm.submit();
+  }
 });

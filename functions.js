@@ -21,6 +21,8 @@ Mexican Cheese:1 package::$5:::Refrigerated::::Turkey Flautas`;
 export function transformInput(inputString) {
   const itemsRaw = inputString.split("\n");
   const items = itemsRaw.reduce((acc, rawItem) => {
+    if (rawItem.trim() === "" || rawItem.trim().startsWith("//")) return acc;
+
     const mealParts = rawItem.split("::::");
     const meal = mealParts[1].trim();
 
@@ -77,9 +79,10 @@ export function convertToShoppingList(itemCategories) {
       itemCategories[itemCategory].items.forEach((item) => {
         const itemCost = calculateCost(item);
         totalEstimate += itemCost;
+        categoryCost += itemCost;
         totalEstimatedElement.innerText = `$${totalEstimate} estimated `;
 
-        sectionTitle.innerText = `${itemCategory} ($${totalEstimate})`;
+        sectionTitle.innerText = `${itemCategory} ($${categoryCost})`;
 
         const itemId = `groceryItem-${itemCategory}-${item.name}`;
         const li = document.createElement("li");
@@ -88,7 +91,11 @@ export function convertToShoppingList(itemCategories) {
         checkbox.id = itemId;
         checkbox.name = itemId;
         checkbox.addEventListener("change", (e) => {
-          totalSpent += itemCost;
+          if (e.target.checked) {
+            totalSpent += itemCost;
+          } else {
+            totalSpent -= itemCost;
+          }
           totalSpentElement.innerText = `- $${totalSpent} spent = $${
             totalEstimate - totalSpent
           } remaining`;
